@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="form-body" style="height: auto; width: 600px; justify-content: center; align-self: center;">
+        <div class="error">
+            {% if form.errors %}
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    <li style="list-style: none;">
+                        <strong>{{ field }}:</strong>
+                        {% for error in errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+        <h1>Add Review!</h1>
+        <p style="margin: 20px;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis, odit?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="rating">Ratings</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1">★</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="description">Description</label>
+                {{ form.description }}
+            </div>
+            <button type="submit">Add Review</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const stars = document.querySelectorAll(".star-rating label");
+
+        stars.forEach((star, index) => {
+            star.addEventListener("click", () => {
+                highlightStars(stars, index);
+            });
+
+            star.addEventListener("mouseover", () => {
+                highlightStars(stars, index);
+            });
+
+            star.addEventListener("mouseout", () => {
+                resetStars(stars);
+            });
+        });
+
+        function highlightStars(stars, index) {
+            stars.forEach((star, i) => {
+                if (i <= index) {
+                    star.style.color = "gold";
+                } else {
+                    star.style.color = "#ddd";
+                }
+            });
+        }
+
+        function resetStars(stars) {
+            const checkedStar = Array.from(stars).find((star) =>
+                star.previousElementSibling.checked
+            );
+
+            stars.forEach((star) => {
+                star.style.color = "#ddd";
+            });
+
+            if (checkedStar) {
+                const checkedIndex = Array.from(stars).indexOf(checkedStar);
+                highlightStars(stars, checkedIndex);
+            }
+        }
+    });
+</script>
+{% endblock body %}

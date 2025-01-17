@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<section class="heroh" style="margin-bottom: 50px;position: relative;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+    <div class="overlay" style="position: absolute;text-align: center;">
+        <h1 style="color: #fff">Our Team</h1>
+        <p style="color: #b3b3b3">home > Our Team</p>
+    </div>
+</section>
+<section class="workers-group">
+    {% for team in teams %}
+    <div class="worker-card" style="position: relative;">
+        <img src="{{ team.photo.url }}" alt="photo">
+        <div class="level" style="position: absolute;margin: 0 auto;left: 40%;top: 500px;">
+            <span style="color: rgb(0, 0, 0);background-color: #ffb758;padding: 10px;border-radius: 5px;">{{ team.staff_level }}</span>
+        </div>
+        <div class="context" style="padding-top: 40px;">
+            <h1 style="color:#000;">{{ team.user.username }}</h1>
+            <p style="color: #363636;">{{ team.slcd }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+{% endblock body %}

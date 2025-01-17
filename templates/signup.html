@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container" style="display: flex;justify-content: center;">
+    <div class="form-body" style="height: auto;width: 600px;justify-content: center;">
+        <div class="error">
+            {% if form.errors %}
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li style="list-style: none;">
+                            <strong>{{ field }}:</strong>
+                            {% for error in errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <form  method="post">
+            {% csrf_token %}
+            <div class="input-group" style="margin: 60px;width: 400px;">
+                <label for="username">enter your username</label>
+                {{ form.username }}
+            </div>
+            <div class="input-group" style="margin: 60px;width: 400px;">
+                <label for="password1">enter your password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="input-group" style="margin: 60px;width: 400px;">
+                <label for="password2">confirm your password</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit">signup</button>
+        </form>
+        <div class="form-footer">
+            <a href="/login/">login</a>
+        </div>
+    
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<!-- Hero Section -->
+    <section class="hero">
+        
+        <div class="hero-content">
+            <h1>Where Flavor Meets Passion</h1>
+            <button>Reserve a Table</button>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about">
+        <div class="text">
+            <h2>About Us</h2>
+            <p>Our restaurant combines tradition and innovation, offering a culinary journey that reflects our rich heritage and modern approach to cooking. Experience flavors crafted with love and passion.</p>
+        </div>
+        <div class="image">
+            <img src="{% static "restaurant.jpg" %}" alt="Restaurant Interior" style="height:40rem;width:auto">
+        </div>
+    </section>
+
+    <!-- Food Categories Section -->
+    <section class="categories">
+        <h2>Our Food Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="{% static "salad.jpg" %}" alt="Appetizers">
+                <h3>Appetizers</h3>
+                <p>Start your meal with a delightful selection of appetizers.</p>
+            </div>
+            <div class="category-card">
+                <img src="{% static "burger2.jpg" %}" alt="Main Courses">
+                <h3>Main Courses</h3>
+                <p>Savor our hearty and delicious main dishes.</p>
+            </div>
+            <div class="category-card">
+                <img src="{% static "desert.jpg" %}" alt="Desserts">
+                <h3>Desserts</h3>
+                <p>Indulge in our sweet and tempting desserts.</p>
+            </div>
+            <div class="category-card">
+                <img src="{% static "beverages.jpg" %}" alt="Beverages">
+                <h3>Beverages</h3>
+                <p>Quench your thirst with our refreshing drinks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="staff">
+        <h2>Meet Our Team</h2>
+        <div class="staff-grid">
+            {% for worker in worker %}
+            <div class="staff-card">
+                <img src="{{ worker.photo.url }}" alt="Head Chef" style="object-fit:cover;">
+                <h3>{{ worker.user.username }}</h3>
+                <p>{{ worker.slcd }}</p>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </section>
+
+    <section class="reviews">
+        <a href="/addreview/">add review</a>
+        <!-- Reviews Section -->
+        <section class="reviews">
+            <h2>What Our Customers Say</h2>
+            <div class="carousel">
+                {% for review in reviews %}
+                <div class="carousel-item">
+                    <p><strong>{{ review.by }}</strong> - <em>"{{ review.description }}"</em></p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </section>
+    
+
+    <!-- Call-to-Action Section -->
+    <section class="cta">
+        <h2>Ready to Experience the Flavor?</h2>
+        <button>Book a Table</button>
+    </section>
+{% endblock body %}

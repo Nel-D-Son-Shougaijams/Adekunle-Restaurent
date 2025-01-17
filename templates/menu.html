@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<section class="heroh" style="margin-bottom: 50px;position: relative;">
+    <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+    <div class="overlay" style="position: absolute;text-align: center;">
+        <h1 style="color: #fff">Menu</h1>
+        <p style="color: #b3b3b3">home > Menu</p>
+    </div>
+</section>
+<div class="menu-header">
+    <h1 class="menu" style="color: #000;font-size: 80px;">Today's Menu</h1>
+<div class="button-group">
+    <button>Pizza</button>
+    <button>Sushi</button>
+    <button>salad</button>
+    <button>Dessert</button>
+    <button>burger</button>
+</div>
+</div>
+
+
+{% for category in menu %}
+    <section class="category-section" style="display: none;" id="c-{{ category }}">
+        <div class="food-items">
+            {% for food in page_obj %}
+                {% if food.category == category %}
+                <div class="fooditem-cover">
+                    <div class="food-item">
+                        <img class="food-image" src="{{ food.image.url }}" alt="food image" style="height: 150px;width: 150px;object-fit: cover;align-self: center;padding: 0;">
+                        <div class="food-content">
+                            <a href="{% url "polls:food_detail" name=food.name %}" style="text-decoration:none;color:#000">
+                                <h3 class="food-name">{{ food.name }}</h3>
+                            </a>
+                            <p class="food-description">{{ food.description }}</p>
+                            <div class="food-footer">
+                                <span class="food-price">${{ food.price }}</span>
+                                {% if food.status == "available" %}
+                                <form action="{% url 'polls:addtocart' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="sc" id="sc" value="Cart0">
+                                    <input type="hidden" name="name" id="name" value="{{ food.name }}">
+                                    <button class="add-to-cart-btn" type="submit"><img style="height: 65px;width: 65px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                                </form>                                {% else %}
+                                <button class="add-to-cart-btn-dis" disabled><img style="height: 80px;width: 80px;" src="{% static 'outofstock.png' %}" alt="out of stock"></button>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>                    
+                </div>
+                {% endif %}
+            {% empty %}
+                <p>No food items available in this category.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endfor %}
+
+<div class="menu-section">
+    <div class="left-section">
+        <img src="{% static 'burger.jpg' %}" alt="burger" style="height: 30rem;position: relative;">
+        <div class="image-content" style="position: absolute;">
+            <h1>Explore The new Taste</h1>
+            <p>Enjoy your lucious dishes wherever you want</p>
+            <button>Order Now</button>
+        </div>
+    </div>
+    <div class="right-section">
+        <ul>
+            <li>
+                <div>
+                    <h3>Pizza Hut</h3>
+                    <span>$5.95</span>
+                    <p>Shrimp,Squid,Pineapple</p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <h3>Apricot Chicken</h3>
+                    <span>$5.65</span>
+                    <p>Shrimp, Squid, Pineapple</p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <h3>Summer Pizza</h3>
+                    <span>$8.95</span>
+                    <p>Shrimp, Squid, Pineapple</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="vertical-tabs">
+    <div class="vertical-tab">
+        <img src="{% static 'scooter.png' %}" alt="Free Shipping">
+        <div class="text">
+            <h3>Free Shipping</h3>
+            <p>Sign up for updates and get free shipping</p>
+        </div>
+    </div>
+    <div class="vertical-tab">
+        <img src="{% static 'timer.png' %}" alt="Easy Returns">
+        <div class="text">
+            <h3>30 Minutes Delivery</h3>
+            <p>Everything you order will quickly delivered to your door.</p>
+        </div>
+    </div>
+    <div class="vertical-tab">
+        <img src="{% static 'psclice.png' %}" alt="24/7 Support">
+        <div class="text">
+            <h3>Best Quality Guarantee.</h3>
+            <p>Poco is an international chain of family restaurants.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<section class="heroh" style="margin-bottom: 50px;position: relative;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+    <div class="overlay" style="position: absolute;text-align: center;">
+        <h1 style="color: #fff">Orders</h1>
+        <p style="color: #b3b3b3">home > Orders</p>
+    </div>
+</section>
+<div class="container">
+    <h1 style="color: black;">Order history</h1>
+</div>
+{% if no %}
+<h1>No orders yet</h1>
+{% else %}
+
+<div class="orders-group">
+    {% for key,value in o.items %}
+    <div class="order-item">
+        <h1>{{ key }}</h1>
+        <h3 style="font-weight: bold;color: #3f3f3f;">Products</h3>
+        <div class="product-details">
+            {% for key, product in value.products.items %}
+                <p class="name">{{ product.name }}</p>
+                <p class="price">{{ product.price }}</p>
+                <p class="quantity">{{ product.quantity }}</p>
+            {% endfor %}
+        </div>
+        <ul>
+            <li><p>Order status:    {{ value.current }}</p></li>
+            <li><p>Order details:   {{ value.details }}</p></li>
+            <li><P>Ordered at:  {{ value.created_at }}</p></li>
+        </ul>
+        
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock body %}
