@@ -72,7 +72,18 @@
                 {% for review in reviews %}
                 <div class="carousel-item">
                     <p><strong>{{ review.by }}</strong> - <em>"{{ review.description }}"</em></p>
+                    <div class="" style="display: flex;">
+                        {% for key, i in rates.items %}
+                        {% if key == review.pk %}
+                        {% for a in i %}
+                        <span>⭐</span>
+                        {% endfor %}
+                        {% endif %}
+                        
+                        {% endfor %}
+                    </div>
                 </div>
+                
                 {% endfor %}
             </div>
         </section>

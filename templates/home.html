@@ -165,9 +165,9 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="sc" id="sc" value="Cart0">
                                     <input type="hidden" name="name" id="name" value="{{ food.name }}">
-                                        <button style="background-color: #ffbb00; padding: 15px;border-radius: 10px;border: 1px solid;">Buy</button>
-                                </form>                {% else %}
-                                <button disabled="disabled">out of stock</button>
+                                    <button class="add-to-cart-btn" type="submit"><img style="height: 65px;width: 65px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                                </form>                                {% else %}
+                                <p style="font-size: 20px;color: red;">out of stock</p>
                                 {% endif %}
                             </div>
                         </div>
@@ -188,7 +188,7 @@
             <h1>30 minutes Delivery</h1>
             <p style="color: rgb(145, 145, 145);">If you’re having a meeting, working late at night and need an extra push.
                 Let us know and we will be there</p>
-                <button>order now</button>
+                <a href="/menu"><button>order now</button></a>
         </div>
     </div>
     
@@ -203,15 +203,17 @@
             {% for review in reviews %}
             <div class="carousel-item">
                 <p><strong>{{ review.by }}</strong> - <em>"{{ review.description }}"</em></p>
-                <div class="star-display" aria-label="Rating: {{ review.rating }}">
-                    {% for i in star_range %}
-                        {% if i <= review.rating %}
-                            <span class="star filled">⭐</span> <!-- Full Star -->
-                        {% else %}
-                            <span class="star">★</span> <!-- Empty Star -->
-                        {% endif %}
+                <div class="" style="display: flex;">
+                    {% for key, i in rates.items %}
+                    {% if key == review.pk %}
+                    {% for a in i %}
+                    <span>⭐</span>
                     {% endfor %}
+                    {% endif %}
+                    
+                {% endfor %}
                 </div>
+                
             </div>
             {% endfor %}
         </div>

@@ -43,8 +43,8 @@
                                     <input type="hidden" name="name" id="name" value="{{ food.name }}">
                                     <button class="add-to-cart-btn" type="submit"><img style="height: 65px;width: 65px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
                                 </form>                                {% else %}
-                                <button class="add-to-cart-btn-dis" disabled><img style="height: 80px;width: 80px;" src="{% static 'outofstock.png' %}" alt="out of stock"></button>
-                                {% endif %}
+                                <p style="font-size: 20px;color: red;">out of stock</p>
+                                                                {% endif %}
                             </div>
                         </div>
 
@@ -64,7 +64,8 @@
         <div class="image-content" style="position: absolute;">
             <h1>Explore The new Taste</h1>
             <p>Enjoy your lucious dishes wherever you want</p>
-            <button>Order Now</button>
+            <a href="#"><button>Order Now</button></a>
+            
         </div>
     </div>
     <div class="right-section">

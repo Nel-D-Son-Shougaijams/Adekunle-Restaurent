@@ -9,24 +9,12 @@
   </div>
 </section>
 <div class="maincons">
-  <div class="sidebar">
-    <div class="sidebar">
-      <div class="tabs">
-      </div>
-      <div class="search-container">
-          <input type="text" placeholder="Search here..." class="search-input" id="searchBar" />
-      </div>
-      <div class="view-toggle">
-          <button id="grid-view" class="view-btn active" style="background-color: #fff;"><img style="height: 30px;width: 30px;" src="{% static 'grid.png' %}" alt="grid"></button>
-          <button id="list-view" class="view-btn" style="background-color: #fff;"><img style="height: 30px;width: 30px;" src="{% static 'list.png' %}" alt="list"></button>
-      </div>
-  </div>
-  </div>
+  
   <div class="container">
 
-    <div id="blog-container" class="grid-view">
+    <div style="display: flex;flex-wrap: wrap;">
         {% for blog in blogs %}
-          <div class="blog-card">
+          <div class="blog-card" style="width: 500px;margin: 20px;">
             <img src="{{ blog.image.url }}" alt="Blog Image">
             <div class="blog-content">
               <h3>{{ blog.name }}</h3>
@@ -38,22 +26,4 @@
     </div>
   </div>
 </div>
-
-  <script>
-    const listViewButton = document.getElementById('list-view');
-const gridViewButton = document.getElementById('grid-view');
-const blogContainer = document.getElementById('blog-container');
-
-listViewButton.addEventListener('click', () => {
-  blogContainer.classList.remove('grid-view');
-  blogContainer.classList.add('list-view');
-});
-
-gridViewButton.addEventListener('click', () => {
-  blogContainer.classList.remove('list-view');
-  blogContainer.classList.add('grid-view');
-});
-
-  
-  </script>
 {% endblock %}

@@ -54,7 +54,10 @@ def index(request):
         cart = request.session.get("cart",{})
     menu = ["pizza","sushi","salad","desert","burger"]
     reviews = Review.objects.all()
-    return render(request, 'home.html',{"fooditems":food,"carts":cart,"menu":menu,"reviews":reviews,"session":session})
+    rates = {}
+    for r in reviews:
+        rates[r.pk] = range(int(r.rating))
+    return render(request, 'home.html',{"fooditems":food,"carts":cart,"menu":menu,"reviews":reviews,"session":session,'rates':rates})
 
 def menu(request):
     deletebob()
@@ -82,7 +85,10 @@ def food_detail(request, name):
 def about(request):
     deletebob()
     reviews = Review.objects.all()
-    return render(request, 'about.html',{"reviews":reviews})
+    rates = {}
+    for r in reviews:
+        rates[r.pk] = range(int(r.rating))
+    return render(request, 'about.html',{"reviews":reviews,'rates':rates})
 
 def create(request):
     deletebob()

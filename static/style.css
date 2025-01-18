@@ -52,8 +52,8 @@ body {
 }
 
 .vertical-tab img {
-  height: 100px;
-  max-width: 100px;
+  height: 150px;
+  max-width: 150px;
   transition: transform 0.3s ease;
 }
 
@@ -1416,18 +1416,9 @@ iframe {
 
 /* Blog Container */
 #blog-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-}
-
-/* Grid View */
-.grid-view {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-/* List View */
-.list-view {
-  grid-template-columns: 1fr;
 }
 
 /* Blog Card */

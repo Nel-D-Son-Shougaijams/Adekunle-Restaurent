@@ -69,7 +69,7 @@
                     <input type="hidden" name="name" id="name" value="{{ food.name }}">
                     <button class="add-to-cart-btn" type="submit"><img style="height: 50px;width: 50px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
                 </form>                {% else %}
-                <button class="add-to-cart-btn-dis" disabled><img style="height: 50px;width: 50px;" src="{% static 'outofstock.png' %}" alt="outofstock"></button>
+                <p style="font-size: 20px;color: red;">out of stock</p>
                 {% endif %}
             </div>
         </div>
