@@ -18,7 +18,7 @@ class FoodItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     descriptions = models.TextField()
     category = models.CharField(max_length=200, choices=choices)
-    image = models.ImageField(default="random-foods.jpg")
+    image = models.ImageField()
     img2 = models.ImageField(blank=True,null=True)
     img3 = models.ImageField(blank=True,null=True)
     status = models.CharField(max_length=50, choices=stat,default="available")

@@ -41,7 +41,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="sc" id="sc" value="Cart0">
                                     <input type="hidden" name="name" id="name" value="{{ food.name }}">
-                                    <button class="add-to-cart-btn" type="submit" style="border-radius: 100%;"><img style="height: 65px;width: 65px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                                    <button class="add-to-cart-btn" type="submit"><img style="height: 65px;width: 65px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
                                 </form>                                {% else %}
                                 <button class="add-to-cart-btn-dis" disabled><img style="height: 80px;width: 80px;" src="{% static 'outofstock.png' %}" alt="out of stock"></button>
                                 {% endif %}

@@ -24,7 +24,7 @@ with open(BASE_DIR /'secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
@@ -77,8 +77,14 @@ WSGI_APPLICATION = 'RestaurantA.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': 'railway',
+        # 'USER': 'postgres',
+        # 'PASSWORD':'cyhsBNgykMFqzAFOfJBaLeYpSQDBZFve',
+        # 'HOST':'roundhouse.proxy.rlwy.net',
+        # 'PORT':'12092',
     }
 }
 
