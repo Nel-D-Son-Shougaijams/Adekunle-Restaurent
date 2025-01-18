@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <!-- Food Detail Section -->
+    <div class="detail-group">
+        <div class="left-section">
+            <div class="image-scroll">
+                <img src="{{ food.image.url }}" alt="Food Image" class="food-image" style="height: 500px;object-fit: cover;">
+            {% if food.img2 %}
+            <img src="{{ food.img2.url }}" alt="Food Image" class="food-image" style="height: 500px;object-fit: cover;">
+            {% endif %}
+            {% if food.img3 %}
+            <img src="{{ food.image.url }}" alt="Food Image" class="food-image" style="height: 500px;object-fit: cover;">
+            {% endif %}
+            </div>            
+        </div>
+        <div class="right-section">
+            <h1 class="food-name" style="font-size: 80px;">{{ food.name }}</h1>
+            <p class="food-description">{{ food.descriptions }}</p>
+            <h5 class="food-price">₹{{ food.price }}</h5>
+            <div class="quantity-section">
+                <input type="number" name="quantity" id="quantity" min="1" value="1" class="quantity-input">
+                {% if food.status == "available" %}
+                <form action="{% url 'polls:addtocart' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="sc" id="sc" value="Cart0">
+                    <input type="hidden" name="name" id="name" value="{{ food.name }}">
+                    <button class="add-to-cart-btn" type="submit" style="margin-top: 25px;"><img style="height: 100px;width: 100px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                </form>                {% else %}
+                <button class="add-to-cart-btn-dis" disabled><img style="height: 50px;width: 50px;" src="{% static 'outofstock.png' %}" alt="outofstock"></button>
+                {% endif %}
+                <p>{{ food.status }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="description-section" style="border-bottom: 1px dashed #333333;padding-bottom: 40px;">
+        <h2>Description</h2>
+        <p>{{ food.descriptions }}</p>
+    </div>
+
+    <div class="suggestions">
+        <h1 style="text-align: center;color: #000;font-size: 70px;margin-bottom: 30px;">Related products</h1>
+        <section class="food-group" style="border: none;">
+            {% for food in suggest %}
+            <div class="shop-food" data-food-name="{{ food.name }}">
+                <div class="grove">
+                <img class="food-image" src="{{ food.image.url }}" alt="food image" style="height: 100px;width: 100px;object-fit: cover;">
+                </div>
+                <div class="sbody">
+                
+                    <a href="{% url "polls:food_detail" name=food.name %}" style="text-decoration:none;color:#000">
+                        <h3 class="food-name">{{ food.name }}</h3>
+                    </a>
+                    <p>{{ food.sliced }}</p>
+                    <div class="sgroup">
+                        <span>${{ food.price }}</span>
+                    </div>
+                    {% if food.status == "available" %}
+                    <form action="{% url 'polls:addtocart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="sc" id="sc" value="Cart0">
+                        <input type="hidden" name="name" id="name" value="{{ food.name }}">
+                        <button class="add-to-cart-btn" type="submit"><img style="height: 50px;width: 50px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                    </form>                {% else %}
+                    <button class="add-to-cart-btn-dis" disabled><img style="height: 50px;width: 50px;" src="{% static 'outofstock.png' %}" alt="outofstock"></button>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endblock body %}

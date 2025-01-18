@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<section class="heroh" style="margin-bottom: 50px;position: relative;">
+    <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+    <div class="overlay" style="position: absolute;text-align: center;">
+        <h1 style="color: #fff">Contact Us</h1>
+        <p style="color: #b3b3b3">home > Contact Us</p>
+    </div>
+</section>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<div class="container">
+    <h1 style="color: black;font-size: 80px;">Call us or visit place</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, ea.</p>
+</div>
+<div class="flex-grousp" style="margin: 50px;">
+    <div class="group">
+        <img src="" alt="">
+        <h3>phone:</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, ut.</p>
+    </div>
+    <div class="group">
+        <img src="" alt="">
+        <h3>address:</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex!</p>
+    </div>
+    <div class="group">
+        <img src="" alt="">
+        <h3>email:</h3>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam, iste.</p>
+    </div>
+</div>
+<div class="media-group">
+    <div class="left">
+        <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8343.190333892255!2d91.69806750979814!3d26.1924018042217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375a5b6bf26969f1%3A0xc752809363b33443!2sIndian%20Institute%20of%20Technology%20Guwahati!5e0!3m2!1sen!2sin!4v1736910933112!5m2!1sen!2sin" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+    </div>
+    <div class="right">
+        <div class="form-body" style="height: auto;">
+            <div>
+                <h1>Send Us A Message</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, numquam.</p>
+            </div>
+            <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="name">your name</label>
+                <input type="text" name="name">
+            </div>
+            <div class="input-group">
+                <label for="name">your email</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="input-group">
+                <label for="name">subject</label>
+                <input type="text" name="subject" id="sub">
+            </div>
+            <div class="input-group">
+                <label for="name">your message</label>
+                <input type="text" name="message" id="mess">
+            </div>
+            <button type="submit" class="btn-submit">submit</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

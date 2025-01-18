@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <h1 style="color: black;font-size: 80px;">Order confirmation</h1>
+    <p style="font-size: 20px;">checkout confirmation for the following items:</p>
+    {% if session %}
+    {% for key,product in cart.items %} <!-- Corrected variable names -->
+            <div class="cart-products" style="border-style: dashed; margin: 10px;">
+                
+                <p>{{ product.name }}</p> <!-- Directly access product attributes -->
+                {{ product.quantity }}
+                <h1>{{ total }}</h1>
+            </div>
+    {% endfor %}
+        <a href="{% url 'polls:orde' %}" style="font-size: 40px;">confirm order</a>
+        <a href="{% url 'polls:cn' %}" style="color: red;">cancel</a>
+    {% else %}
+    {% for key,product in cart.products.items %} <!-- Corrected variable names -->
+            <div class="cart-products">
+                <h3>{{ product.name }}</h3> <!-- Directly access product attributes -->
+                <p style="font-size: 30px;">{{ product.quantity }}</p>
+                <h1 style="color: #788cff;">{{ total }}</h1>
+            </div>
+    {% endfor %}
+    <a href="{% url 'polls:confirm' cart.pk %}" style="font-size: 40px;">confirm order</a>
+    <a href="{% url 'polls:cancel' cart.pk %}"  style="color: red;">cancel</a>
+    {% endif %}
+</div>
+{% endblock body %}

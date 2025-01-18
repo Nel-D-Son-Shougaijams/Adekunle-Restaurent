@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Carts | Restaurant{% endblock title %}
+
+{% block body %}
+    {% if session %}
+    <div class="cart"  style="border-style: dashed; margin: 20px; padding: 20px;">
+        <h1 style="font-size: 50px; color: black;">Cart</h1>
+        <div class="cart-products" style="border-style: dashed; margin: 10px; padding: 10px;">
+                {% for key, product in carts.items %}
+                <div style="border-bottom: 1px solid black; padding: 10px;">
+                    <h3 style="font-size: 30px;">{{ product.name }}</h3>
+                    <p>Quantity: {{ product.quantity }}</p>
+                    <h1 style="color: rgb(123, 154, 255);">₹{{ product.price }}</h1>
+                    <form action="/deleteitemsession/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="name" value="{{ product.name }}">
+                        <button type="submit">Delete Item</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'polls:buy' %}">Buy Cart</a>
+    </div>
+            
+    {% endif %}
+    {% if session == False %}
+    {% for cart in carts %}
+    <div class="cart" style="border-style: dashed; margin: 20px; padding: 20px;">
+        <h1 style="font-size: 50px; color: black;">{{ cart.name }}</h1>
+
+        <!-- If using sessions for anonymous users -->
+        
+            <!-- For authenticated users -->
+            <div class="cart-products" style="border-style: dashed; margin: 10px; padding: 10px;">
+                {% for product in cart.products.values %}
+                <div style="border-bottom: 1px solid black; padding: 10px;">
+                    <h3 style="font-size: 30px;">{{ product.name }}</h3>
+                    <p>Quantity: {{ product.quantity }}</p>
+                    <h1 style="color: rgb(123, 154, 255);">₹{{ product.price }}</h1>
+                    <form action="{% url "polls:remove" %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="name" value="{{ cart.name }}">
+                        <input type="hidden" name="product" value="{{ product.name }}">
+                        <button type="submit">Delete Item</button>
+                    </form>   
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'polls:delcart' cart.name %}" style="color: red;">Delete Cart</a>
+            <a href="{% url 'polls:order' cart.name %}">Buy Cart</a>
+    </div>
+    {% empty %}
+        <p>Your cart is empty. Start adding items!</p>
+    {% endfor %}
+    {% endif %}
+    
+{% endblock body %}

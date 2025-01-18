@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static%}
+<div class="container">
+<div class="form-body" style="margin:100px;width:500px">
+    {% if session %}
+    <form method="post" action="{% url 'polls:buy' %}">
+        {% if error == None %}
+        {% else %}
+        <h1>{{ error }}</h1>
+        {% endif %}
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="details">details or modifications for your order</label>
+            {{ form.details }}
+        </div>
+        <div class="input-group">
+            <label for="phone_number">your phone number</label>
+            {{ form.phone_number}}
+        </div>
+        <div class="input-group">
+            <label for="address">your Address</label>
+            {{ form.address }}
+        </div>
+        <button type="submit">Order</button>
+    </form>
+    {% else %}
+    <form method="post">
+        {% if error == None %}
+        {% else %}
+        <h1>{{ error }}</h1>
+        {% endif %}
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="details">details or modifications for your order</label>
+            {{ form.details }}
+        </div>
+        <div class="input-group">
+            <label for="phone_number">your phone number</label>
+            {{ form.phone_number}}
+        </div>
+        <div class="input-group">
+            <label for="address">your Address</label>
+            {{ form.address }}
+        </div>
+        <button type="submit">Order</button>
+    </form>
+    {% endif %}
+    
+</div>
+</div>
+
+{% endblock body %}

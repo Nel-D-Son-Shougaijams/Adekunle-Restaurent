@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% block body %}
+<section class="heroh" style="margin-bottom: 50px;position: relative;">
+    <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+    <div class="overlay" style="position: absolute;text-align: center;">
+        <h1 style="color: #fff">Shop</h1>
+        <p style="color: #b3b3b3">home > shop</p>
+    </div>
+</section>
+
+<div class="maincon">
+    <div class="sidebar">
+        <div class="tabs">
+            <div class="category">
+                <ul class="cat">
+                    {% for cat in menu %}
+                    <li>
+                        <div>
+                            <a href="?category={{ cat }}" class="tab-btn {% if cat == current_category %}active{% endif %}">
+                                <h3>{{ cat }}</h3>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search here..." class="search-input" id="searchBar" />
+        </div>
+        <div class="sort-by">
+            <div class="price-slider-container">
+                <label for="minPrice" class="slider-label">Price Range:</label>
+                <div class="slider-values">
+                    <span id="minPriceValue">0</span>
+                    <span>-</span>
+                    <span id="maxPriceValue">1000</span>
+                </div>
+                <input type="range" id="minPrice" class="price-slider" min="0" max="1000" value="0" step="10">
+                <input type="range" id="maxPrice" class="price-slider" min="0" max="1000" value="1000" step="10">
+                <button id="filterBtn" class="filter-btn">Apply</button>
+            </div>            
+        </div>
+    </div>
+
+    {% for cat in menu %}
+    <section class="food-group" style="display: none;" id="c-{{ cat }}">
+        {% for food in page_obj %}
+        {% if cat == "all" %}
+        <div class="shop-food" data-food-name="{{ food.name }}">
+            <div class="grove">
+            <img class="food-image" src="{{ food.image.url }}" alt="food image">
+            </div>
+            <div class="sbody">
+            
+                <a href="{% url "polls:food_detail" name=food.name %}" style="text-decoration:none;color:#000">
+                    <h3 class="food-name">{{ food.name }}</h3>
+                </a>
+                <p>{{ food.sliced }}</p>
+                <div class="sgroup">
+                    <span>${{ food.price }}</span>
+                </div>
+                {% if food.status == "available" %}
+                <form action="{% url 'polls:addtocart' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="sc" id="sc" value="Cart0">
+                    <input type="hidden" name="name" id="name" value="{{ food.name }}">
+                    <button class="add-to-cart-btn" type="submit"><img style="height: 50px;width: 50px;" src="{% static 'addtocart.png' %}" alt="add to cart"></button>
+                </form>                {% else %}
+                <button class="add-to-cart-btn-dis" disabled><img style="height: 50px;width: 50px;" src="{% static 'outofstock.png' %}" alt="outofstock"></button>
+                {% endif %}
+            </div>
+        </div>
+        {% elif food.category == cat %}
+        <div class="shop-food" data-food-name="{{ food.name }}">
+            <div class="grove">
+            <img class="food-image" src="{{ food.image.url }}" alt="food image">
+            </div>
+            <div class="sbody">
+            
+                <a href="{% url "polls:food_detail" name=food.name %}" style="text-decoration:none;color:#000">
+                    <h3 class="food-name">{{ food.name }}</h3>
+                </a>
+                <p>{{ food.sliced }}</p>
+                <div class="sgroup">
+                    <span>${{ food.price }}</span>
+                </div>
+                {% if food.status == "available" %}
+                <form action="{% url 'polls:addtocart' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="sc" id="sc" value="Cart0">
+                    <input type="hidden" name="name" id="name" value="{{ food.name }}">
+                    <button class="add-to-cart-btn" type="submit">Add to Cart</button>
+                </form>                {% else %}
+                <button class="add-to-cart-btn-dis" disabled>out of stock</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </section>
+    {% endfor %}
+
+</div>
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?category={{ current_category }}&page=1" class="pagination-link">First</a>
+        <a href="?category={{ current_category }}&page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+    {% endif %}
+
+    <span class="current-page">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?category={{ current_category }}&page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+        <a href="?category={{ current_category }}&page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last</a>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchBar = document.getElementById("searchBar");
+        const foodItems = document.querySelectorAll(".shop-food");
+        const gridViewBtn = document.getElementById("gridViewBtn");
+        const columnViewBtn = document.getElementById("columnViewBtn");
+        const buttons = document.querySelectorAll(".tab-btn");
+        const sections = document.querySelectorAll(".food-group");
+
+        // Search functionality
+        searchBar.addEventListener("input", function () {
+            const query = searchBar.value.toLowerCase();
+            foodItems.forEach((item) => {
+                const foodName = item.getAttribute("data-food-name").toLowerCase();
+                if (foodName.includes(query)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        // Default: Show the first section and make the first button active
+        if (sections.length > 0 && buttons.length > 0) {
+            sections[0].style.display = "flex"; // Use flex for proper layout
+            buttons[0].classList.add("active");
+        }
+
+        // Tab button functionality
+        buttons.forEach((button) => {
+            button.addEventListener("click", function () {
+                sections.forEach((section) => (section.style.display = "none"));
+                buttons.forEach((btn) => btn.classList.remove("active"));
+
+                const targetId = button.getAttribute("data-target");
+                document.getElementById(targetId).style.display = "flex";
+                button.classList.add("active");
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const minSlider = document.getElementById("minPrice");
+        const maxSlider = document.getElementById("maxPrice");
+        const minPriceValue = document.getElementById("minPriceValue");
+        const maxPriceValue = document.getElementById("maxPriceValue");
+        const filterBtn = document.getElementById("filterBtn");
+        const foodItems = document.querySelectorAll(".shop-food");
+
+        // Update displayed values dynamically
+        minSlider.addEventListener("input", () => {
+            minPriceValue.textContent = minSlider.value;
+            if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
+                maxSlider.value = minSlider.value;
+                maxPriceValue.textContent = minSlider.value;
+            }
+        });
+
+        maxSlider.addEventListener("input", () => {
+            maxPriceValue.textContent = maxSlider.value;
+            if (parseInt(maxSlider.value) < parseInt(minSlider.value)) {
+                minSlider.value = maxSlider.value;
+                minPriceValue.textContent = maxSlider.value;
+            }
+        });
+
+        // Filter items on button click
+        filterBtn.addEventListener("click", function () {
+            const minPrice = parseFloat(minSlider.value);
+            const maxPrice = parseFloat(maxSlider.value);
+
+            foodItems.forEach(foodItem => {
+                const price = parseFloat(
+                    foodItem.querySelector(".sgroup span").textContent.replace("$", "")
+                );
+
+                // Show or hide based on price range
+                if (price >= minPrice && price <= maxPrice) {
+                    foodItem.style.display = "flex";
+                } else {
+                    foodItem.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

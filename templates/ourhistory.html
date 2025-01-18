@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<section class="heroh" style="margin-bottom: 50px;position: relative;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <img src="{% static 'random-foods.jpg' %}" alt="heroh">
+        <div class="overlay" style="position: absolute;text-align: center;">
+            <h1 style="color: #fff">Shop</h1>
+            <p style="color: #b3b3b3">home > shop</p>
+        </div>
+    </section>
+<section class="heroh">
+    
+    <header style="text-align: center;margin: 50px;padding: 100px;">
+        <h3 style="font-family:cursive">about our history</h3>
+        <h1>Our History.</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, tenetur.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, illo.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis architecto eum vel cumque enim qui! Saepe quas blanditiis expedita architecto suscipit accusamus mollitia veniam, libero tenetur nam. Qui, inventore? Quod.</p>
+    </header>
+    <ul style="margin: 20px;margin-bottom: 50px;">
+        <li>
+            <div class="history-item">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, iusto.</p>
+            </div>
+            <img src="{% static 'placeholder-1280x.webp' %}" alt="">
+            <span class="year">1990</span>
+        </li>
+        <li>
+            <div class="history-item">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, iusto.</p>
+            </div>
+            <img src="{% static 'placeholder-1280x.webp' %}" alt="">
+            <span class="year">1990</span>
+        </li>
+        <li>
+            <div class="history-item">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, iusto.</p>
+            </div>
+            <img src="{% static 'placeholder-1280x.webp' %}" alt="">
+            <span class="year">1990</span>
+        </li>
+        <li>
+            <div class="history-item">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, iusto.</p>
+            </div>
+            <img src="{% static 'placeholder-1280x.webp' %}" alt="">
+            <span class="year">1990</span>
+        </li>
+    </ul>
+</section>
+{% endblock body %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container" style="display: flex;justify-content: center;">
+        
+    <div class="form-body" style="height: auto;width: 600px;justify-content: center;">
+        {% if error %}
+        <div class="error">
+            <p>{{ error}}</p>
+        </div>
+        {% endif %}
+        <form  method="post">
+            {% csrf_token %}
+            <div class="input-group" style="margin: 60px;width: 400px;">
+                <label for="username">enter your username</label>
+                <input type="text" name="name" id="username">
+            </div>
+            <div class="input-group" style="margin: 60px;width: 400px;">
+                <label for="password">enter your password</label>
+                <input type="text" name="password" id="password">
+            </div>
+            <button type="submit">login</button>
+        </form>
+        <div class="form-footer">
+            <a href="/login/">signup</a>
+
+        </div>
+</div>
+</div>
+</body>
+</html>
