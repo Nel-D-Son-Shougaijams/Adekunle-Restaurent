@@ -26,7 +26,7 @@ with open(BASE_DIR /'secret_key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1','.now.sh']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 # Application definition
 
@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'RestaurantA.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD':'cyhsBNgykMFqzAFOfJBaLeYpSQDBZFve',
-        'HOST':'roundhouse.proxy.rlwy.net',
-        'PORT':'12092',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': 'railway',
+        # 'USER': 'postgres',
+        # 'PASSWORD':'cyhsBNgykMFqzAFOfJBaLeYpSQDBZFve',
+        # 'HOST':'roundhouse.proxy.rlwy.net',
+        # 'PORT':'12092',
     }
 }
 
