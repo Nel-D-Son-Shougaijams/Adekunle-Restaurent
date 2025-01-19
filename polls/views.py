@@ -41,7 +41,7 @@ def sendEmail(subject,data):
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
     except Exception as e:
-        print(f"Error sending email: {e}")
+        pass
 
 def index(request):
     food = FoodItem.objects.all()
@@ -328,6 +328,8 @@ def order(request,cn):
     error = None
     cn = Cart.objects.get(name=cn,user=request.user)
     total = cn.total()
+    if not cn.products:
+        return redirect("polls:cart")
     if request.user.is_authenticated:
         session= False
     else:

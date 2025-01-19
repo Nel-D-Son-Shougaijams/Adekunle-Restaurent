@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'RestaurantA.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'NAME': 'railway',
-        # 'USER': 'postgres',
-        # 'PASSWORD':'cyhsBNgykMFqzAFOfJBaLeYpSQDBZFve',
-        # 'HOST':'roundhouse.proxy.rlwy.net',
-        # 'PORT':'12092',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD':'cyhsBNgykMFqzAFOfJBaLeYpSQDBZFve',
+        'HOST':'roundhouse.proxy.rlwy.net',
+        'PORT':'12092',
     }
 }
 
@@ -144,3 +144,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # SESSION EXPIRY
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000
