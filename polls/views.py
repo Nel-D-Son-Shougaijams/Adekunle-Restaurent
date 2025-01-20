@@ -356,7 +356,7 @@ def checkoutconfirm(request,pk):
     orderitem = Order.objects.get(product=carts)
     orderitem.confirm = True
     orderitem.save()
-    asyncio.run(send_order_notification(orderitem))
+    send_order_notification(orderitem)
     return redirect("polls:shopping")
 
 def checkoutcancel(request,pk):
