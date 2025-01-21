@@ -18,9 +18,6 @@ class FoodItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     descriptions = models.TextField()
     category = models.CharField(max_length=200, choices=choices)
-    image = models.ImageField()
-    img2 = models.ImageField(blank=True,null=True)
-    img3 = models.ImageField(blank=True,null=True)
     status = models.CharField(max_length=50, choices=stat,default="available")
     
     def __str__(self):
@@ -83,7 +80,6 @@ class Cart(models.Model):
         return total_order_price
 
 class Article(models.Model):
-    image = models.ImageField()
     name = models.CharField(max_length=100)
     content = models.TextField()
     author = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -107,7 +103,6 @@ class Worker(models.Model):
         ("owner","Owner"),
     ]
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    photo = models.ImageField()
     description = models.TextField()
     staff_level = models.CharField(max_length=50, choices=choices, default="chef")
 
@@ -133,5 +128,3 @@ class Order(models.Model):
     created_at = models.DateField(auto_now=False, auto_now_add=True)
     confirm = models.BooleanField(null=True,blank=True)
     items = models.JSONField(null=True,blank=True)
-
-

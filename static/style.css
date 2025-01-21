@@ -1921,3 +1921,99 @@ iframe {
   width: 50%;
   overflow: hidden;
 }
+/* Responsive Enhancements */
+
+/* Images and Videos */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Flexbox and Grid Enhancements */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.grid-view .shop-food,
+.column-view .shop-food {
+  width: 100%; /* Full width for smaller screens */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+  .menu-section, .detail-group {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menu-section .left-section,
+  .detail-group .left-section {
+    width: 100%; /* Full width */
+  }
+
+  .menu-section .right-section,
+  .detail-group .right-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .vertical-tabs {
+    flex-direction: column; /* Stack tabs vertically */
+  }
+
+  .vertical-tab {
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem; /* Reduce font size for mobile */
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .menu-section .left-section .image-content {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu-section {
+    padding: 20px; /* Adjust padding */
+  }
+
+  .hero-content h1 {
+    font-size: 2rem; /* Smaller heading */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar nav ul {
+    flex-direction: column; /* Stack navigation */
+    gap: 10px;
+  }
+
+  .navbar nav ul li {
+    font-size: 14px; /* Smaller text */
+  }
+}
+
+/* Buttons */
+button {
+  width: auto; /* Auto width for responsiveness */
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+button:hover {
+  transform: scale(1.05); /* Slight hover effect */
+}

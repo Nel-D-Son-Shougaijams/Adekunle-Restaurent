@@ -5,7 +5,7 @@ class ArticleForm(forms.ModelForm):
     
     class Meta:
         model = Article
-        fields = ("image","name","content","author",)
+        fields = ("name","content","author",)
 
 class ReviewForm(forms.ModelForm):
     class Meta:
